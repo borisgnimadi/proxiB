@@ -21,7 +21,7 @@ import service.Login;
  * Cette Servlet gère les opérations du CRUD, en faisant appel aux classes
  * concernées.
  */
-@WebServlet({ "/addConseiller", "/addClient", "/deleteClient", "/editClient" })
+@WebServlet({ "/addConseiller", "/deleteClient", "/editClient" })
 public class ServletAddUserOrClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -53,40 +53,7 @@ public class ServletAddUserOrClient extends HttpServlet {
 			throws ServletException, IOException {
 		
 		
-		String path = request.getRequestURI();
-		ClientDao daoClient = new ClientDao();
-		ConseillerDao daoConseiller = new ConseillerDao();
-		
-		if (path.contains("addClient")) {
-			Client cl = new Client(
-					request.getParameter("nom"), 
-					request.getParameter("prenom"), 
-					request.getParameter("adresse"), 
-					request.getParameter("ville"), 
-					Integer.valueOf(request.getParameter("codePostal")), 
-					request.getParameter("phone"), 
-					true
-					);
-			
-				System.out.println("test dans Servlet : "+cl);
-				daoClient.create(cl);
-			address = "/WEB-INF/index.jsp";
-		}
-		
-		if (path.contains("addConseiller")) {
 
-			Conseiller cons = new Conseiller(
-					request.getParameter("nom"), 
-					request.getParameter("prenom"), 
-					request.getParameter("email")
-					);
-
-				daoConseiller.create(cons);
-			address = "/WEB-INF/index.jsp";
-		}
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(address);
-		dispatcher.forward(request, response);
 
 	}
 

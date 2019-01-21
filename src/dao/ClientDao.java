@@ -3,46 +3,45 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Client;
+import model.Conseiller;
 import model.Personne;
 
 public class ClientDao extends AbstractDaoJdbc implements UserDao {
 
 	@Override
 	public void create(Personne p) {
-		System.out.println("test dans DAO : " + p);
+		Client cl = (Client) p;
 
 		try {
 			Connection cn = AbstractDaoJdbc.getConnetion();
 
-			String req = "INSERT INTO client (nom,prenom,phone,adresse,ville,"
-					+ " code_postal,CompteCourant,CompteEpargne,typeCarteBancaire) "
-					+ " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String req = "INSERT INTO client (nom,prenom,telephone,adresse,ville," + " code_postal) "
+					+ " VALUES ( ?, ?, ?, ?, ?, ?)";
 			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
-			st.setString(1, null);
-			st.setString(2, null);
+			st.setString(1, cl.getNom());
+			st.setString(2, cl.getPrenom());
 			/*
 			 * st.setString(3, p.getPhone()); st.setString(4, p.getAdresse());
 			 * st.setString(5, p.getVille()); st.setInt(6, p.getCodePostal());
 			 */
-			st.setString(3, null);
-			st.setString(4, null);
-			st.setString(5, null);
-			st.setInt(6, 0);
-			st.setString(7, null);
-			st.setString(8, null);
-			st.setString(9, null);
-
+			st.setString(3, cl.getTelephone());
+			st.setString(4, cl.getAdresse());
+			st.setString(5, cl.getVille());
+			st.setInt(6, cl.getCode_postal());
 
 			st.execute();
 
-			AbstractDaoJdbc.close(cn, st, null);
 			System.out.println("une ligne inserée avec succès !");
-			;
+			AbstractDaoJdbc.close(cn, st, null);
+
 		} catch (Exception e) {
-			System.err.println("Erreur : Pas d'insertion !");
+			System.err.println("Erreur : Pas d'insertion de conseiller !");
+			e.printStackTrace();
 
 		}
 
@@ -93,8 +92,29 @@ public class ClientDao extends AbstractDaoJdbc implements UserDao {
 
 	@Override
 	public List<Personne> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Personne> allPerson = new ArrayList<>();
+		try {
+			Connection cn = AbstractDaoJdbc.getConnetion();
+			String req = "SELECT * FROM client ";
+			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
+			ResultSet rs = st.executeQuery(req);
+
+			while (rs.next()) {
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String phone = rs.getString("telephone");
+				Client client = new Client(prenom, nom, phone, phone, 0, phone);
+				allPerson.add(client);
+			}
+			AbstractDaoJdbc.close(cn, st, rs);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("Problème de connexion !");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allPerson;
 	}
 
 }

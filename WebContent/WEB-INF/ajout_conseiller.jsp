@@ -3,7 +3,7 @@
 <div class="alert alert-info text-center" role="alert">Note : les
 	références conseiller sont générés automatiquement.</div>
 	
-<form class="formStyle" method="post" action="addConseiller">
+<form class="formStyle" method="post" action="Gerant">
 
 	<div class="form-group">
 		<label
@@ -41,7 +41,17 @@
 	</div>
 
 
-
+	<div class="form-group">
+		<label
+			class="control-label col-md-5 text-right control-label"
+			data-toggle="tooltip" title="" for="motdepasse"
+			data-original-title="Préciser le prénom">Mot de passe du conseiller</label>
+		<div class="col-md-7">
+			<input type="password" id="motdepasse" name="motdepasse"
+				class="form-control text-format form-control" value=""
+				placeholder="Mot de passe ">
+		</div>
+	</div>
 	
 	<div class="form-group">
 		<div class="">

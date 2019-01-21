@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 
 <%
 	String activeGerant = "";
 	String activeConseiller = "";
 	String userType = "";
+	String path = (String)request.getAttribute("path");
 
-	if (request.getParameter("page") != null) {
-		if (request.getParameter("page").equals("gerant")) {
-			activeGerant = "nav-item active";
-			userType = "gerant";
-		} else {
-			activeConseiller = "nav-item active";
-			userType = "conseiller";
-
-		} 
+	if (request.getAttribute("path")!=null&& path.contains("Gerant")) {
+		activeGerant = "nav-item active";
+		userType = "gerant";
+	} else if (request.getAttribute("path")!=null&& path.contains("Conseiller")) {
+		activeConseiller = "nav-item active";
+		userType = "conseiller";
 	}
 %>
 
@@ -32,7 +31,7 @@
 </head>
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-inverse bg-primary navbar-fixed-top"> 
+	<nav class="navbar navbar-inverse bg-primary navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<a href="./"><img class="mb-4 img-circle" src="images/logo.jpg"
@@ -49,10 +48,10 @@
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class=""><a href="./">Accueil</a></li>
-					<li class="<%=activeGerant%>"><a class="nav-link" href="accueilAppli?page=gerant"
-						id="navbardrop"> Gérant </a></li>
+					<li class="<%=activeGerant%>"><a class="nav-link"
+						href="Gerant" id="navbardrop"> Gérant </a></li>
 					<li class="<%=activeConseiller%>"><a class="nav-link"
-						href="accueilAppli?page=conseiller" id="navbardrop"> Conseiller </a></li>
+						href="Conseiller" id="navbardrop"> Conseiller </a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

@@ -2,7 +2,7 @@
 	informations du nouveau client</h3>
 <div class="alert alert-info text-center" role="alert">Note : les
 	numéros de comptes sont générés automatiquement.</div>
-<form class="formStyle" method="post" action="addClient">
+<form class="formStyle" method="post" action="Conseiller?page=ajout-client">
 	<div class="form-group">
 		<label
 			class="control-label col-md-5 text-right control-label"

@@ -12,8 +12,22 @@
       <include-prelude>/WEB-INF/taglibs.jsp</include-prelude>
     </jsp-property-group>
   </jsp-config>
- <servlet>
-  <servlet-name>Accueil</servlet-name>
-  <servlet-class>Accueil</servlet-class>
-</servlet> 
-</web-app>
+  <servlet>
+    <servlet-name>Accueil</servlet-name>
+    <servlet-class>Accueil</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AccueilGerant</servlet-name>
+    <servlet-class>AccueilGerant</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>ServletAddUserOrClient</servlet-name>
+    <servlet-class>ServletAddUserOrClient</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>AccueilConseiller</servlet-name>
+    <servlet-class>AccueilConseiller</servlet-class>
+  </servlet>
+  </web-app>
+  
+  

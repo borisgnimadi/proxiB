@@ -1,12 +1,12 @@
 <div class="serviceHeader">
 
-<a class="btn btn-md btn-primary" href="accueilAppli?page=conseiller&page2=voir-liste-clients" role="button">Voir la liste de mes clients</a>
-<a class="btn btn-md btn-success" href="accueilAppli?page=conseiller&page2=ajout-client" role="button">Ajouter un nouveau client</a>
-<a class="btn btn-md btn-info"    href="accueilAppli?page=conseiller&page2=virement" role="button">Effectuer un virement</a>
+<a class="btn btn-md btn-primary" href="Conseiller?page=liste-client" role="button">Voir la liste de mes clients</a>
+<a class="btn btn-md btn-success" href="Conseiller?page=ajout-client" role="button">Ajouter un nouveau client</a>
+<a class="btn btn-md btn-info"    href="Conseiller?page=virement" role="button">Effectuer un virement</a>
 </div>
 <div class="wellContainer">
 	<%
-		String pageConseiller = request.getParameter("page2");
+		String pageConseiller = request.getParameter("page");
 		if (pageConseiller != null) {
 			switch (pageConseiller) {
 			case "voir-liste-clients":

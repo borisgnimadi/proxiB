@@ -21,7 +21,9 @@
             switch(userType){
                 case "gerant":%><%@include file="gerant.jsp"%><%
                 break; 
-                default :%><%@include file="conseiller.jsp"%><%
+                case "conseiller":%><%@include file="conseiller.jsp"%><%
+                break; 
+                default :%><%@include file="indexAccueil.jsp"%><%
                 break; 
             } 
 

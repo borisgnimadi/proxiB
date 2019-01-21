@@ -38,8 +38,7 @@ public abstract class AbstractDaoJdbc {
         String urlDB = "jdbc:mysql://localhost:3306/proxibanque_bolau";
         String userDB = "root";
         String passwordDB = "";
-        
-        System.out.println();
+        Class.forName("com.mysql.jdbc.Driver");
         cn = DriverManager.getConnection(urlDB, userDB, passwordDB);
 //        cn.setAutoCommit(false);
         return cn;

@@ -25,7 +25,8 @@ import service.Login;
 public class ServletAddUserOrClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	String address;
+	String address = "/WEB-INF/index.jsp";
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -79,10 +80,8 @@ public class ServletAddUserOrClient extends HttpServlet {
 					request.getParameter("prenom"), 
 					request.getParameter("email")
 					);
-			Personne con = new Conseiller("testServlet", "Aubin Boris", "test1");
 
-				System.out.println("test dans Servlet : "+cons);
-				daoConseiller.create(con);
+				daoConseiller.create(cons);
 			address = "/WEB-INF/index.jsp";
 		}
 		

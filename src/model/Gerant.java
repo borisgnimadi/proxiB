@@ -15,17 +15,6 @@ public class Gerant extends Personne {
 		return conseillers;
 	}
 	
-	public void addConseiller(Conseiller conseiller) {
-		getConseillers().add(conseiller);
-		conseiller.setGerant(this);
-	}
-
-	public void setConseillers(ArrayList<Conseiller> conseillers) {
-		this.conseillers = conseillers;
-		for(Conseiller c : getConseillers()) {
-			c.setGerant(this);
-		}
-	}
 
 	public Agence getAgence() {
 		return agenceRef.get();

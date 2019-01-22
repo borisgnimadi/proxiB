@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Client;
+import model.Utilisateur;
 
 
 public class ClientDao extends AbstractDaoJdbc implements UserDao <Client> {
@@ -79,8 +80,31 @@ public class ClientDao extends AbstractDaoJdbc implements UserDao <Client> {
 
 	@Override
 	public Client findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Client person = null;
+		try {
+			Connection cn = AbstractDaoJdbc.getConnetion();
+			String req = "SELECT * FROM client WHERE id = '"+id+"'";
+			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
+			ResultSet rs = st.executeQuery(req);
+
+			while (rs.next()) {
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String adresse = rs.getString("adresse");
+				String ville = rs.getString("ville");
+				int code_postal= rs.getInt("code_postal");
+				String phone = rs.getString("telephone");
+				person = new Client(id, nom, prenom, adresse, ville, code_postal, phone, false);
+			}
+			AbstractDaoJdbc.close(cn, st, rs);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("Problème de connexion !");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return person;
 	}
 
 	@Override

@@ -47,7 +47,12 @@ public class AccueilConseiller extends HttpServlet {
 		ClientServiceCRUD cldao = new ClientServiceCRUD();
 
 		if (path.contains("Conseiller")) {
-
+			
+			// voir/modifier un client
+			if (request.getParameter("page") != null && request.getParameter("page").contains("voir-client")) {
+				Client client = cldao.findById(Integer.valueOf(request.getParameter("clientid")));
+				request.setAttribute("unClient", client);
+			}
 			// affiche liste de clients
 			if (request.getParameter("page") != null && request.getParameter("page").contains("liste-client")) {
 				List<Client> client = cldao.findAll();

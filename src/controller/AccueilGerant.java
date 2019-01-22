@@ -57,7 +57,15 @@ public class AccueilGerant extends HttpServlet {
 				request.setAttribute("listeClient", client);
 				System.out.println("test servlet");
 			}
-			// suppression de conseiller
+
+			// 			// suppression de client
+			if (request.getParameter("page") != null && request.getParameter("page").equals("delete-client")
+					&& request.getParameter("id") != null) {
+				cldao.delete(Integer.valueOf(request.getParameter("id")));
+				List<Client> clients = cldao.findAll();
+				request.setAttribute("listeClient", clients);
+			}	
+			//suppression de conseiller
 			if (request.getParameter("page") != null && request.getParameter("page").equals("delete-conseiller")
 					&& request.getParameter("id") != null) {
 				condao.delete(Integer.valueOf(request.getParameter("id")));

@@ -17,6 +17,10 @@
 	%><%@include file="ajout_client.jsp"%>
 	<%
 		break;
+			case "voir-client":
+	%><%@include file="voir_client.jsp"%>
+	<%
+		break;
 			case "virement":
 	%><%@include file="virement.jsp"%>
 	<%

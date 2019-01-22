@@ -2,7 +2,7 @@
 	informations du nouveau client</h3>
 <div class="alert alert-info text-center" role="alert">Note : les
 	numéros de comptes sont générés automatiquement.</div>
-<form class="formStyle" method="post" action="Conseiller?page=modifie-client">
+<form class="formStyle" method="post" action="Conseiller?page=ajout-client">
 	<div class="form-group">
 		<label
 			class="control-label col-md-5 text-right control-label"
@@ -17,7 +17,6 @@
 		</div>
 	</div>
 
-
 	<div class="form-group">
 		<label
 			class="control-label col-md-5 text-right control-label"
@@ -25,7 +24,7 @@
 			data-original-title="Préciser le nom">Nom</label>
 		<div class="col-md-7">
 			<input type="text" id="name" name="nom"
-				class="form-control text-format form-control" value=""
+				class="form-control text-format form-control" value="${unClient.nom }"
 				placeholder="Nom du client" required='required'>
 		</div>
 	</div>
@@ -36,7 +35,7 @@
 			data-original-title="Préciser le prénom">Prénom</label>
 		<div class="col-md-7">
 			<input type="text" id="firstname" name="prenom"
-				class="form-control text-format form-control" value=""
+				class="form-control text-format form-control" value="${unClient.prenom }"
 				placeholder="Prénom du client">
 		</div>
 	</div>
@@ -48,7 +47,7 @@
 			data-original-title="Préciser l'adresse">Adresse </label>
 		<div class="col-md-7">
 			<input type="text" id="adresse" name="adresse"
-				class="form-control text-format form-control" value=""
+				class="form-control text-format form-control" value="${unClient.adresse }"
 				placeholder="Adresse du client" required='required'>
 		</div>
 	</div>
@@ -59,7 +58,7 @@
 			data-original-title="Préciser la ville">Ville</label>
 		<div class="col-md-7">
 			<input type="text" id="ville" name="ville"
-				class="form-control text-format form-control" value=""
+				class="form-control text-format form-control" value="${unClient.ville }"
 				placeholder="Ville du client" required='required'>
 		</div>
 	</div>
@@ -71,7 +70,7 @@
 		<div class="col-md-7">
 			<input type="number" min="10000" max="99999" name="codePostal"
 				id="postalCode" class="form-control" placeholder="Code postal"
-				value="" required='required'>
+				value="${unClient.code_postal }" required='required'>
 		</div>
 	</div>
 	<div class="form-group">
@@ -82,7 +81,7 @@
 			de téléphone</label>
 		<div class="col-md-7">
 			<input type="text" name="phone" id="phone" class="form-control"
-				placeholder="Téléphone portable" value="" required='required'>
+				placeholder="Téléphone portable" value="${unClient.telephone }" required='required'>
 		</div>
 	</div>
 	<div class="form-group">
@@ -104,7 +103,7 @@
 		<div class="">
 			<div class="col-sm-2 col-sm-offset-5">
 				<button type="submit" name="createClient" id="createClient"
-					class="form-control btn btn-success">Valider</button>
+					class="form-control btn btn-success">Enregistrer</button>
 			</div>
 		</div>
 	</div>

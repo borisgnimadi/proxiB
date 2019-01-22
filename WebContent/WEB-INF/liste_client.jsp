@@ -27,6 +27,7 @@
         <td><c:out value="${ client.nom }" /></td>
         <td><c:out value="${ client.prenom }" /></td>
         <td><a href="Conseiller?page=voir-client&clientid=<c:out value="${ client.id }" />">Voir/modifier client</a></td>
+<%--          <td><a href="Conseiller?page=create_compte_courant&clientid=<c:out value="${ client.id }" />">Creer compte courant</a></td> --%>
 <td><a class="btn-danger" href="?page=delete-client&id=<c:out value="${ client.id }" />">Supprimer</a></td>
       </tr>			
 </c:forEach>			

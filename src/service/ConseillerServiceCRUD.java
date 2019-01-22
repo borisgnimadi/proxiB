@@ -4,7 +4,6 @@ import java.util.List;
 
 import dao.ConseillerDao;
 import model.Conseiller;
-import model.Personne;
 
 public class ConseillerServiceCRUD implements UserServiceCRUD<Conseiller> {
 	
@@ -17,8 +16,8 @@ public class ConseillerServiceCRUD implements UserServiceCRUD<Conseiller> {
 	}
 
 	@Override
-	public Conseiller findByUsername(String name) {
-		return dao.findByUsername(name);
+	public Integer findIdByUsername(String nom, String prenom) {
+		return dao.findIdByUsername(nom, prenom);
 	}
 
 	@Override

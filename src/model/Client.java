@@ -7,8 +7,7 @@ public class Client extends Personne {
 	private int code_postal;
 	private String telephone;
 	private CompteCourant compteCourant;
-	private CompteEpargne compteEpargne;
-	private CarteBancaire carteBancaire;
+	private CompteCourant compteEpargne;
 	private boolean isEntreprise;
 	private int refConseiller;
 
@@ -77,38 +76,29 @@ public class Client extends Personne {
 		this.telephone = telephone;
 	}
 
+
+
 	public CompteCourant getCompteCourant() {
 		return compteCourant;
 	}
 
 	public void setCompteCourant(CompteCourant compteCourant) {
 		this.compteCourant = compteCourant;
-		compteCourant.setClient(this);
 	}
 
-	public CompteEpargne getCompteEpargne() {
+	public CompteCourant getCompteEpargne() {
 		return compteEpargne;
 	}
 
-	public void setCompteEpargne(CompteEpargne compteEpargne) {
+	public void setCompteEpargne(CompteCourant compteEpargne) {
 		this.compteEpargne = compteEpargne;
-		compteEpargne.setClient(this);
 	}
 
-	public CarteBancaire getCarteBancaire() {
-		return carteBancaire;
-	}
-
-	public void setCarteBancaire(CarteBancaire carteBancaire) {
-		this.carteBancaire = carteBancaire;
-		carteBancaire.setClient(this);
-	}
-
-	public boolean isEntreprise() {
+	public boolean getIsEntreprise() {
 		return isEntreprise;
 	}
 
-	public void setEntreprise(boolean isEntreprise) {
+	public void setIsEntreprise(boolean isEntreprise) {
 		this.isEntreprise = isEntreprise;
 	}
 
@@ -135,7 +125,7 @@ public class Client extends Personne {
 	public String toString() {
 		return "Client [nom=" + nom + ",prénom=" + prenom + ",adresse=" + adresse + ", ville=" + ville + ", code_postal=" + code_postal + ", telephone="
 				+ telephone + ", compteCourant=" + compteCourant + ", compteEpargne=" + compteEpargne
-				+ ", carteBancaire=" + carteBancaire + ", isEntreprise=" + isEntreprise + ", conseillerRef="
+				+ ", isEntreprise=" + isEntreprise + ", conseillerRef="
 				+ refConseiller + "]";
 	}
 

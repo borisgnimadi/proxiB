@@ -45,7 +45,7 @@ System.out.println(cons);
 	}
 
 	@Override
-	public Conseiller findByUsername(String name) {
+	public Integer findIdByUsername(String nom, String prenom) {
 		// TODO Auto-generated method stub
 		return null;
 	}

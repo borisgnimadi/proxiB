@@ -2,11 +2,11 @@
 	informations du nouveau client</h3>
 <div class="alert alert-info text-center" role="alert">Note : les
 	numéros de comptes sont générés automatiquement.</div>
-<form class="formStyle" method="post" action="Conseiller?page=modifie-client">
+<form class="formStyle" method="post" action="Conseiller?page=ajout-client">
 	<div class="form-group">
 		<label
 			class="control-label col-md-5 text-right control-label"
-			data-toggle="tooltip" title="" for="gender"
+			data-toggle="tooltip" title="" for="isEntreprise"
 			data-original-title="Préciser le type de client">Type de client</label>
 		<div class="col-md-7">
 			<select required="required" class="form-control" name="isEntreprise">
@@ -85,21 +85,31 @@
 				placeholder="Téléphone portable" value="" required='required'>
 		</div>
 	</div>
+
 	<div class="form-group">
 		<label
 			class="control-label col-md-5 text-right control-label"
-			data-toggle="tooltip" title="" for="gender"
-			data-original-title="Préciser la Carte bancaire">Carte bancaire</label>
+			data-toggle="tooltip" title="" for="soldeCompteCourant"
+			data-original-title="Préciser le solde du Commpte Courant">Solde Commpte Courant</label>
 		<div class="col-md-7">
-			<select required="required" class="form-control" name="carteBancaire">
-				<option value="">préciser</option>
-				<option value="1">Visa classique</option>
-				<option value="2">Visa premium</option>
-			</select>
+			<input type="number" id="soldeCompteCourant" name="soldeCompteCourant"
+				class="form-control text-format form-control" value=""
+				placeholder="Solde Commpte Courant" required='required'>
 		</div>
 	</div>
 
-	
+	<div class="form-group">
+		<label
+			class="control-label col-md-5 text-right control-label"
+			data-toggle="tooltip" title="" for="soldeCompteEpargne"
+			data-original-title="Préciser le solde du Commpte Courant">Solde Commpte Epargne</label>
+		<div class="col-md-7">
+			<input type="number" id="soldeCompteEpargne" name="soldeCompteEpargne"
+				class="form-control text-format form-control" value=""
+				placeholder="Solde Commpte Epargne" required='required'>
+		</div>
+	</div>
+		
 	<div class="form-group">
 		<div class="">
 			<div class="col-sm-2 col-sm-offset-5">

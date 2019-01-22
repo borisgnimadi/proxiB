@@ -2,11 +2,11 @@
 	informations du nouveau client</h3>
 <div class="alert alert-info text-center" role="alert">Note : les
 	numéros de comptes sont générés automatiquement.</div>
-<form class="formStyle" method="post" action="Conseiller?page=ajout-client">
+<form class="formStyle" method="post" action="Conseiller?page=modifie-client">
 	<div class="form-group">
 		<label
 			class="control-label col-md-5 text-right control-label"
-			data-toggle="tooltip" title="" for="gender"
+			data-toggle="tooltip" title="" for="isEntreprise"
 			data-original-title="Préciser le type de client">Type de client</label>
 		<div class="col-md-7">
 			<select required="required" class="form-control" name="isEntreprise">

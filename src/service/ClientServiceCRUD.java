@@ -3,9 +3,7 @@ package service;
 import java.util.List;
 
 import dao.ClientDao;
-import dao.ConseillerDao;
 import model.Client;
-import model.Personne;
 
 public class ClientServiceCRUD implements UserServiceCRUD <Client>{
 	
@@ -19,18 +17,17 @@ public class ClientServiceCRUD implements UserServiceCRUD <Client>{
 	}
 
 	@Override
-	public Client findByUsername(String name) {
-		return dao.findByUsername(name);	}
+	public Integer findIdByUsername(String nom, String prenom) {
+		return dao.findIdByUsername(nom, prenom);	}
 
 	@Override
-	public void update(Client user) {
-		// TODO Auto-generated method stub
+	public void update(Client cl) {
+		dao.update(cl);	
 		
 	}
 
 	@Override
 	public Client findById(int id) {
-		// TODO Auto-generated method stub
 		return dao.findById(id);
 	}
 
@@ -41,11 +38,13 @@ public class ClientServiceCRUD implements UserServiceCRUD <Client>{
 
 	@Override
 	public List<Client> findAll() {
-		// TODO Auto-generated method stub
 		return dao.findAll();
 	}
 
 	
+	public void depotFondSurCompte(int numCompte, Double montant, String nom, String prenom) {
+		dao.depotFondSurCompte(numCompte, montant, nom, prenom);		
+	}
 
 
 }

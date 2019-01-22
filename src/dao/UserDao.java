@@ -15,7 +15,7 @@ import java.util.*;
 public interface UserDao <T>{
 	
 	public void create(T p);
-	public T findByUsername(String name);	
+	public Integer findIdByUsername(String nom, String prenom);	
 	public void update(T user);
 	public T findById(int id);
 	public void delete(int id);

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import dao.ClientDao;
 import dao.ConseillerDao;
 import model.Client;
+import model.CompteCourant;
+import model.CompteEpargne;
 import model.Conseiller;
 import model.Personne;
 import service.ClientServiceCRUD;
@@ -47,7 +49,7 @@ public class AccueilConseiller extends HttpServlet {
 		ClientServiceCRUD cldao = new ClientServiceCRUD();
 
 		if (path.contains("Conseiller")) {
-			
+
 			// voir/modifier un client
 			if (request.getParameter("page") != null && request.getParameter("page").contains("voir-client")) {
 				Client client = cldao.findById(Integer.valueOf(request.getParameter("clientid")));
@@ -64,7 +66,7 @@ public class AccueilConseiller extends HttpServlet {
 				cldao.delete(Integer.valueOf(request.getParameter("id")));
 				List<Client> clients = cldao.findAll();
 				request.setAttribute("listeClient", clients);
-			}			
+			}
 
 			request.setAttribute("path", path);
 
@@ -77,27 +79,75 @@ public class AccueilConseiller extends HttpServlet {
 
 	}
 
-	/**
+	/** 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session2 = request.getSession();
+		ClientServiceCRUD daoClient = new ClientServiceCRUD();
+
 
 		String path = request.getRequestURI();
+		// ajout de client
 		if (path.contains("Conseiller") && request.getParameter("page") != null
-				&& request.getParameter("page").equals("ajout-client")) { // ajout de client
-			ClientServiceCRUD daoClient = new ClientServiceCRUD();
+				&& request.getParameter("page").equals("ajout-client")) { 
+			Boolean isEntreprise = request.getParameter("isEntreprise").contains("true") ? true : false;
 			Client cl = new Client(request.getParameter("nom"), request.getParameter("prenom"),
-					request.getParameter("adresse"), request.getParameter("ville"), 0, request.getParameter("phone"),
-					true, (Integer) session2.getAttribute("idUser"));
-
-			System.out.println("test dans Servlet : " + cl);
+					request.getParameter("adresse"), request.getParameter("ville"),
+					Integer.valueOf(request.getParameter("codePostal")), request.getParameter("phone"), isEntreprise,
+					(Integer) session2.getAttribute("idUser"));
 			daoClient.create(cl);
+			
+			daoClient.depotFondSurCompte(CompteCourant.CreateCompteCourant(), 
+					Double.valueOf(request.getParameter("soldeCompteCourant")), 
+					request.getParameter("nom"), 
+					request.getParameter("prenom"));
+			
+			daoClient.depotFondSurCompte(CompteEpargne.CreateCompteEpargne(), 
+					Double.valueOf(request.getParameter("soldeCompteCourant")), 
+					request.getParameter("nom"), 
+					request.getParameter("prenom"));
 
 		}
-		request.setAttribute("path", path);
+		
+		// crrer comptes 
+		if (path.contains("Conseiller") && request.getParameter("page") != null
+				&& request.getParameter("page").equals("create_compte_courant")) { 
+			
+			Client cl = new Client(request.getParameter("nom"), request.getParameter("prenom"),
+					request.getParameter("adresse"), request.getParameter("ville"),
+					Integer.valueOf(request.getParameter("codePostal")), request.getParameter("phone"), isEntreprise,
+					(Integer) session2.getAttribute("idUser"));
+			daoClient.create(cl);
+			
+			daoClient.depotFondSurCompte(CompteCourant.CreateCompteCourant(), 
+					Double.valueOf(request.getParameter("soldeCompteCourant")), 
+					request.getParameter("nom"), 
+					request.getParameter("prenom"));
+			
+			daoClient.depotFondSurCompte(CompteEpargne.CreateCompteEpargne(), 
+					Double.valueOf(request.getParameter("soldeCompteCourant")), 
+					request.getParameter("nom"), 
+					request.getParameter("prenom"));
+
+		}
+		
+		create_compte_courant
+		// modification de client
+		if (path.contains("Conseiller") && request.getParameter("page") != null
+				&& request.getParameter("page").equals("modifie-client")) { 
+			Boolean isEntreprise = request.getParameter("isEntreprise").contains("true") ? true : false;
+			ClientServiceCRUD daoClient = new ClientServiceCRUD();
+			Client cl = new Client(request.getParameter("nom"), request.getParameter("prenom"),
+					request.getParameter("adresse"), request.getParameter("ville"),
+					Integer.valueOf(request.getParameter("codePostal")), request.getParameter("phone"), isEntreprise,
+					(Integer) session2.getAttribute("idUser"));
+
+			daoClient.create(cl);
+
+		}		request.setAttribute("path", path);
 		address = "/WEB-INF/index.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(address);
 		dispatcher.forward(request, response);

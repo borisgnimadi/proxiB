@@ -15,21 +15,21 @@ import model.*;
  * @author Adminl
  *
  */
-public class ConseillerDao extends AbstractDaoJdbc implements UserDao {
+public class ConseillerDao extends AbstractDaoJdbc implements UserDao <Conseiller>{
 
 	@Override
-	public void create(Personne p) {
-		Conseiller cons = (Conseiller) p;
+	public void create(Conseiller cons) {
+
 System.out.println(cons);
 		try {
 			Connection cn = AbstractDaoJdbc.getConnetion();
 
-			String req = "INSERT INTO users (nom,prenom,email,motdepasse)  VALUES (?, ?, ?, ?)";
+			String req = "INSERT INTO users (nom,prenom,email,password)  VALUES (?, ?, ?, ?)";
 			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
 			st.setString(1, cons.getNom());
 			st.setString(2, cons.getPrenom());
 			st.setString(3, cons.getEmail());
-			st.setString(4, cons.getEmail());
+			st.setString(4, cons.getMotdepasse());
 
 			st.execute();
 
@@ -41,23 +41,23 @@ System.out.println(cons);
 			e.printStackTrace();
 
 		}
-
+		
 	}
 
 	@Override
-	public Personne findByUsername(String name) {
+	public Conseiller findByUsername(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void update(Personne user) {
+	public void update(Conseiller user) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public Personne findById(int id) {
+	public Conseiller findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -65,27 +65,27 @@ System.out.println(cons);
 	@Override
 	public void delete(int id) {
 		try {
-			Connection cn = AbstractDaoJdbc.getConnetion();
+		Connection cn = AbstractDaoJdbc.getConnetion();
 
-			String req = "DELETE FROM users WHERE id = ?";
-			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
-			st.setInt(1, id);
+		String req = "DELETE FROM users WHERE id = ?";
+		PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
+		st.setInt(1, id);
 
-			st.execute();
+		st.execute();
 
-			System.out.println("une ligne a été supprimé !");
-			AbstractDaoJdbc.close(cn, st, null);
+		System.out.println("une ligne a été supprimé !");
+		AbstractDaoJdbc.close(cn, st, null);
 
-		} catch (Exception e) {
-			System.err.println("Erreur : Pas de suppression !");
-			e.printStackTrace();
+	} catch (Exception e) {
+		System.err.println("Erreur : Pas de suppression !");
+		e.printStackTrace();
 
-		}
+	}		
 	}
 
 	@Override
-	public List<Personne> findAll(){
-		List<Personne> allPerson = new ArrayList<>();
+	public List<Conseiller> findAll() {
+		List<Conseiller> allPerson = new ArrayList<>();
 		try {
 			Connection cn = AbstractDaoJdbc.getConnetion();
 			String req = "SELECT * FROM users ";
@@ -110,5 +110,7 @@ System.out.println(cons);
 		}
 		return allPerson;
 	}
+
+
 
 }

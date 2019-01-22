@@ -3,47 +3,47 @@ package service;
 import java.util.List;
 
 import dao.ConseillerDao;
+import model.Conseiller;
 import model.Personne;
 
-public class ConseillerServiceCRUD implements UserServiceCRUD {
+public class ConseillerServiceCRUD implements UserServiceCRUD<Conseiller> {
 	
 	ConseillerDao dao = new ConseillerDao();
 
 	@Override
-	public void create(Personne p) {
-		if(p!=null) {
-			dao.create(p);
-		}		
+	public void create(Conseiller p) {
+		dao.create(p);
+		
 	}
 
 	@Override
-	public Personne findByUsername(String name) {
-		// TODO Auto-generated method stub
+	public Conseiller findByUsername(String name) {
 		return dao.findByUsername(name);
 	}
 
 	@Override
-	public void update(Personne user) {
+	public void update(Conseiller user) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Personne findById(int id) {
+	public Conseiller findById(int id) {
 		// TODO Auto-generated method stub
-		return dao.findById(id);
+		return null;
 	}
 
 	@Override
 	public void delete(int id) {
-		dao.delete(id);
+		 dao.delete(id);
 		
 	}
 
 	@Override
-	public List<Personne> findAll() {
+	public List<Conseiller> findAll() {
 		// TODO Auto-generated method stub
-		return dao.findAll();
+		 return dao.findAll();
 	}
+
 
 }

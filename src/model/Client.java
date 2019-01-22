@@ -1,8 +1,7 @@
 package model;
 
-import java.lang.ref.WeakReference;
-
 public class Client extends Personne {
+	private Integer id;
 	private String adresse;
 	private String ville;
 	private int code_postal;
@@ -11,12 +10,22 @@ public class Client extends Personne {
 	private CompteEpargne compteEpargne;
 	private CarteBancaire carteBancaire;
 	private boolean isEntreprise;
-	private WeakReference<Conseiller> conseillerRef;
+	private int refConseiller;
 
 	public Client(String nom, String prenom, String adresse, String ville, int code_postal, String telephone) {
 		this(nom, prenom, adresse, ville, code_postal, telephone, false);
 	}
 	
+	public Client(Integer id, String nom, String prenom, String adresse, String ville, int code_postal, String telephone, boolean isEntreprise) {
+		super(nom, prenom);
+		this.adresse = adresse;
+		this.ville = ville;
+		this.code_postal = code_postal;
+		this.telephone = telephone;
+		this.isEntreprise = isEntreprise;
+		this.id = id;
+	}
+
 	public Client(String nom, String prenom, String adresse, String ville, int code_postal, String telephone, boolean isEntreprise) {
 		super(nom, prenom);
 		this.adresse = adresse;
@@ -24,6 +33,16 @@ public class Client extends Personne {
 		this.code_postal = code_postal;
 		this.telephone = telephone;
 		this.isEntreprise = isEntreprise;
+	}
+
+	public Client(String nom, String prenom, String adresse, String ville, int code_postal, String telephone, boolean isEntreprise, int refConseiller) {
+		super(nom, prenom);
+		this.adresse = adresse;
+		this.ville = ville;
+		this.code_postal = code_postal;
+		this.telephone = telephone;
+		this.isEntreprise = isEntreprise;
+		this.refConseiller = refConseiller;
 	}
 
 	public String getAdresse() {
@@ -93,12 +112,23 @@ public class Client extends Personne {
 		this.isEntreprise = isEntreprise;
 	}
 
-	public Conseiller getConseiller() {
-		return conseillerRef.get();
+
+
+	public int getRefConseiller() {
+		return refConseiller;
 	}
 
-	public void setConseiller(Conseiller conseiller) {
-		this.conseillerRef = new WeakReference<Conseiller>(conseiller);
+	public void setRefConseiller(int refConseiller) {
+		this.refConseiller = refConseiller;
+	}
+
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override
@@ -106,7 +136,7 @@ public class Client extends Personne {
 		return "Client [nom=" + nom + ",prénom=" + prenom + ",adresse=" + adresse + ", ville=" + ville + ", code_postal=" + code_postal + ", telephone="
 				+ telephone + ", compteCourant=" + compteCourant + ", compteEpargne=" + compteEpargne
 				+ ", carteBancaire=" + carteBancaire + ", isEntreprise=" + isEntreprise + ", conseillerRef="
-				+ conseillerRef + "]";
+				+ refConseiller + "]";
 	}
 
 	

@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ClientDao;
-import dao.ConseillerDao;
+import model.Client;
 import model.Conseiller;
-import model.Personne;
 import service.ClientServiceCRUD;
 import service.ConseillerServiceCRUD;
 
@@ -41,6 +39,8 @@ public class AccueilGerant extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path = request.getRequestURI();
+		ConseillerServiceCRUD condao = new ConseillerServiceCRUD();
+		ClientServiceCRUD cldao = new ClientServiceCRUD();
 
 		if (path.contains("Gerant")) {
 
@@ -48,23 +48,20 @@ public class AccueilGerant extends HttpServlet {
 
 			// affiche liste de de conseillers
 			if (request.getParameter("page") != null && request.getParameter("page").equals("liste-conseiller")) {
-				ConseillerServiceCRUD condao = new ConseillerServiceCRUD();
-				List<Personne> conseillers = condao.findAll();
+				List<Conseiller> conseillers = condao.findAll();
 				request.setAttribute("listeConseiller", conseillers);
 			}
-			
+
 			if (request.getParameter("page") != null && request.getParameter("page").contains("liste-client")) {
-				ClientServiceCRUD condao = new ClientServiceCRUD();
-				List<Personne> client = condao.findAll();
+				List<Client> client = cldao.findAll();
 				request.setAttribute("listeClient", client);
 				System.out.println("test servlet");
-			}			
+			}
 			// suppression de conseiller
 			if (request.getParameter("page") != null && request.getParameter("page").equals("delete-conseiller")
 					&& request.getParameter("id") != null) {
-				ConseillerServiceCRUD condao = new ConseillerServiceCRUD();
 				condao.delete(Integer.valueOf(request.getParameter("id")));
-				List<Personne> conseillers = condao.findAll();
+				List<Conseiller> conseillers = condao.findAll();
 				request.setAttribute("listeConseiller", conseillers);
 			}
 			address = "/WEB-INF/index.jsp";
@@ -92,9 +89,11 @@ public class AccueilGerant extends HttpServlet {
 				request.setAttribute("path", path);
 
 				Conseiller cons = new Conseiller(null, request.getParameter("nom"), request.getParameter("prenom"),
-						request.getParameter("email"), "toto");
+						request.getParameter("email"), request.getParameter("motdepasse"));
 
 				daoConseiller.create(cons);
+				request.setAttribute("path", "Gerant?page=listeClient");
+
 			}
 			address = "/WEB-INF/index.jsp";
 		}

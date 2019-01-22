@@ -14,7 +14,23 @@
 <div class="container">
 	<h2>Liste des clients</h2>
 
-			<%
-				//List<Client> listecl = (List<Client>) request.getAttribute("listeClient");
-			%>	
-			<%="test liste client : "+request.getAttribute("listeClient")%>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Référence Conseiller</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+			</tr>
+<c:forEach items="${ listeClient }" var="client" varStatus="status">
+      <tr>
+        <td><c:out value="${ client.id }" /></td>
+        <td><c:out value="${ client.nom }" /></td>
+        <td><c:out value="${ client.prenom }" /></td>
+        <td><a href="Conseiller?page=voir-client&clientid=<c:out value="${ client.prenom }" />">Voir/modifier client</a></td>
+<td><a class="btn-danger" href="?page=delete-client&id=<c:out value="${ client.id }" />">Supprimer</a></td>
+      </tr>			
+</c:forEach>			
+			
+		</thead>
+		<tbody>
+</table>

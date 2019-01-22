@@ -8,31 +8,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Client;
-import model.Conseiller;
-import model.Personne;
 
-public class ClientDao extends AbstractDaoJdbc implements UserDao {
+
+public class ClientDao extends AbstractDaoJdbc implements UserDao <Client> {
 
 	@Override
-	public void create(Personne p) {
-		Client cl = (Client) p;
+	public void create(Client p) {
 
 		try {
 			Connection cn = AbstractDaoJdbc.getConnetion();
 
-			String req = "INSERT INTO client (nom,prenom,telephone,adresse,ville," + " code_postal) "
-					+ " VALUES ( ?, ?, ?, ?, ?, ?)";
+			String req = "INSERT INTO client (nom,prenom,telephone,adresse,ville," + " code_postal,id_users) "
+					+ " VALUES ( ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
-			st.setString(1, cl.getNom());
-			st.setString(2, cl.getPrenom());
+			st.setString(1, p.getNom());
+			st.setString(2, p.getPrenom());
 			/*
 			 * st.setString(3, p.getPhone()); st.setString(4, p.getAdresse());
 			 * st.setString(5, p.getVille()); st.setInt(6, p.getCodePostal());
 			 */
-			st.setString(3, cl.getTelephone());
-			st.setString(4, cl.getAdresse());
-			st.setString(5, cl.getVille());
-			st.setInt(6, cl.getCode_postal());
+			st.setString(3, p.getTelephone());
+			st.setString(4, p.getAdresse());
+			st.setString(5, p.getVille());
+			st.setInt(6, p.getCode_postal());
+			st.setInt(7, p.getRefConseiller());
 
 			st.execute();
 
@@ -73,26 +72,41 @@ public class ClientDao extends AbstractDaoJdbc implements UserDao {
 	}
 
 	@Override
-	public void update(Personne user) {
+	public void update(Client user) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Personne findById(int id) {
+	public Client findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		try {
+		Connection cn = AbstractDaoJdbc.getConnetion();
 
+		String req = "DELETE FROM client WHERE id = ?";
+		PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
+		st.setInt(1, id);
+
+		st.execute();
+
+		System.out.println("une ligne a été supprimé !");
+		AbstractDaoJdbc.close(cn, st, null);
+
+	} catch (Exception e) {
+		System.err.println("Erreur : Pas de suppression !");
+		e.printStackTrace();
+
+	}
 	}
 
 	@Override
-	public List<Personne> findAll() {
-		List<Personne> allPerson = new ArrayList<>();
+	public List<Client> findAll() {
+		List<Client> allPerson = new ArrayList<>();
 		try {
 			Connection cn = AbstractDaoJdbc.getConnetion();
 			String req = "SELECT * FROM client ";
@@ -100,10 +114,16 @@ public class ClientDao extends AbstractDaoJdbc implements UserDao {
 			ResultSet rs = st.executeQuery(req);
 
 			while (rs.next()) {
+				int id= rs.getInt("id");
 				String nom = rs.getString("nom");
 				String prenom = rs.getString("prenom");
+				String adresse = rs.getString("adresse");
+				String ville = rs.getString("ville");
+				int code_postal= rs.getInt("code_postal");
 				String phone = rs.getString("telephone");
-				Client client = new Client(prenom, nom, phone, phone, 0, phone);
+				Client client = new Client(id, nom, prenom, adresse, ville, code_postal, phone, false);
+				
+					
 				allPerson.add(client);
 			}
 			AbstractDaoJdbc.close(cn, st, rs);

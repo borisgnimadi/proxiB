@@ -14,9 +14,7 @@
 
 <div class="container">
 	<h2>Liste des conseillers</h2>
-			<%
-				List<Conseiller> listeconseillers = (List<Conseiller>) request.getAttribute("listeConseiller");
-			%>
+	
 	<table class="table">
 		<thead>
 			<tr>
@@ -25,26 +23,20 @@
 				<th>Prénom</th>
 				<th>Email</th>
 			</tr>
+<c:forEach items="${ listeConseiller }" var="conseiller" varStatus="status">
+    
+      <tr>
+        <td><c:out value="${ conseiller.id }" /></td>
+        <td><c:out value="${ conseiller.nom }" /></td>
+        <td><c:out value="${ conseiller.prenom }" /></td>
+        <td><c:out value="${ conseiller.email }" /></td>
+<td><a href="?page=delete-conseiller&id=<c:out value="${ conseiller.id }" />">Supprimer</a></td>
+      </tr>			
+</c:forEach>			
+			
+
 		</thead>
 		<tbody>
-
-		<%
-
-			int i = 0;
-			while (i < listeconseillers.size()) {
-		%>
-		<tr>
-			<td><%=listeconseillers.get(i).getId()%></td>
-			<td><%=listeconseillers.get(i).getNom()%></td>
-			<td><%=listeconseillers.get(i).getPrenom()%></td>
-			<td><%=listeconseillers.get(i).getEmail()%></td>
-			<td><a href="?page=delete-conseiller&id=<%=listeconseillers.get(i).getId()%>">Supprimer</a></td>
-		</tr>
-
-		<%
-			i++;
-			}
-		%>
 
 			<tr>
 			</tr>

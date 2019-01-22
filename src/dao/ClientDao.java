@@ -36,11 +36,11 @@ public class ClientDao extends AbstractDaoJdbc implements UserDao {
 
 			st.execute();
 
-			System.out.println("une ligne inserée avec succès !");
+			System.out.println("un client inseré avec succès !");
 			AbstractDaoJdbc.close(cn, st, null);
 
 		} catch (Exception e) {
-			System.err.println("Erreur : Pas d'insertion de conseiller !");
+			System.err.println("Erreur : Pas d'insertion de client !");
 			e.printStackTrace();
 
 		}

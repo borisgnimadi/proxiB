@@ -50,12 +50,8 @@ public class AccueilConseiller extends HttpServlet {
 				ClientServiceCRUD condao = new ClientServiceCRUD();
 				List<Personne> client = condao.findAll();
 				request.setAttribute("listeClient", client);
-				System.out.println(client);
-				System.out.println(request.getParameter("page"));
 			}
 
-
-			
 			request.setAttribute("path", path);
 
 			address = "/WEB-INF/index.jsp";

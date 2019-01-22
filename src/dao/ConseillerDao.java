@@ -20,19 +20,20 @@ public class ConseillerDao extends AbstractDaoJdbc implements UserDao {
 	@Override
 	public void create(Personne p) {
 		Conseiller cons = (Conseiller) p;
-
+System.out.println(cons);
 		try {
 			Connection cn = AbstractDaoJdbc.getConnetion();
 
-			String req = "INSERT INTO users (nom,prenom,email)  VALUES ( ?, ?, ?)";
+			String req = "INSERT INTO users (nom,prenom,email,motdepasse)  VALUES (?, ?, ?, ?)";
 			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
 			st.setString(1, cons.getNom());
 			st.setString(2, cons.getPrenom());
 			st.setString(3, cons.getEmail());
+			st.setString(4, cons.getEmail());
 
 			st.execute();
 
-			System.out.println("une ligne inserée avec succès !");
+			System.out.println("un conseiller ajouté avec succès !");
 			AbstractDaoJdbc.close(cn, st, null);
 
 		} catch (Exception e) {

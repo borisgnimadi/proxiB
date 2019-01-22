@@ -3,7 +3,7 @@
 <div class="alert alert-info text-center" role="alert">Note : les
 	références conseiller sont générés automatiquement.</div>
 	
-<form class="formStyle" method="post" action="Gerant">
+<form class="formStyle" method="post" action="Gerant?page=ajout-conseiller">
 
 	<div class="form-group">
 		<label

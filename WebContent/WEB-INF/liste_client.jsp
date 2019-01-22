@@ -2,8 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="model.Personne"%>
-<%@page import="model.Client"%>
+<%@page import="model.*"%>
 
 
 <%@page import="java.util.ArrayList"%>
@@ -15,5 +14,7 @@
 <div class="container">
 	<h2>Liste des clients</h2>
 
-	
-			<%=request.getAttribute("listeClient")%>
+			<%
+				//List<Client> listecl = (List<Client>) request.getAttribute("listeClient");
+			%>	
+			<%="test liste client : "+request.getAttribute("listeClient")%>

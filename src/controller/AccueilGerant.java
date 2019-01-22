@@ -14,6 +14,7 @@ import dao.ClientDao;
 import dao.ConseillerDao;
 import model.Conseiller;
 import model.Personne;
+import service.ClientServiceCRUD;
 import service.ConseillerServiceCRUD;
 
 /**
@@ -51,6 +52,13 @@ public class AccueilGerant extends HttpServlet {
 				List<Personne> conseillers = condao.findAll();
 				request.setAttribute("listeConseiller", conseillers);
 			}
+			
+			if (request.getParameter("page") != null && request.getParameter("page").contains("liste-client")) {
+				ClientServiceCRUD condao = new ClientServiceCRUD();
+				List<Personne> client = condao.findAll();
+				request.setAttribute("listeClient", client);
+				System.out.println("test servlet");
+			}			
 			// suppression de conseiller
 			if (request.getParameter("page") != null && request.getParameter("page").equals("delete-conseiller")
 					&& request.getParameter("id") != null) {
@@ -77,16 +85,17 @@ public class AccueilGerant extends HttpServlet {
 
 		String path = request.getRequestURI();
 
-
 		if (request.getRequestURI() != null && path.contains("Gerant")) { // ajout de conseiller
 
-			ConseillerServiceCRUD daoConseiller = new ConseillerServiceCRUD();
-			request.setAttribute("path", path);
+			if (request.getParameter("page") != null && request.getParameter("page").contains("ajout-conseiller")) {
+				ConseillerServiceCRUD daoConseiller = new ConseillerServiceCRUD();
+				request.setAttribute("path", path);
 
-			Conseiller cons = new Conseiller(null, request.getParameter("nom"), request.getParameter("prenom"),
-					request.getParameter("email"));
+				Conseiller cons = new Conseiller(null, request.getParameter("nom"), request.getParameter("prenom"),
+						request.getParameter("email"), "toto");
 
-			daoConseiller.create(cons);
+				daoConseiller.create(cons);
+			}
 			address = "/WEB-INF/index.jsp";
 		}
 

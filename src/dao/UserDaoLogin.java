@@ -4,12 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import model.Client;
-import model.Conseiller;
-import model.Personne;
 import model.Utilisateur;
 
 public class UserDaoLogin extends AbstractDaoJdbc  {

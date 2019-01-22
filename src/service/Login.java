@@ -1,6 +1,7 @@
 package service;
 
 import dao.UserDaoLogin;
+import model.Utilisateur;
 
 /**
  * Elle gère le login du user 
@@ -15,16 +16,9 @@ public class Login {
 	 * @param password
 	 * @return
 	 */
-	public static boolean login(String email, String password) {
-		boolean reponseLogin = false;
-		if(UserDaoLogin.findByEmailPSW(email,password)!=null) {
-			reponseLogin=true;
+	public static Utilisateur login(String email, String password) {
 
-		}
-//		if(email.equals("test@proxi.bk")&&password.equals("test")) {
-//			reponseLogin=true;
-//		}
-		return reponseLogin;
+		return UserDaoLogin.findByEmailPSW(email,password);
 		
 	}
 

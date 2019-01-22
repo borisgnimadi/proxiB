@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Personne;
+import model.Utilisateur;
 import service.ConseillerServiceCRUD;
 import service.Login;
 
@@ -64,11 +65,14 @@ public class Accueil extends HttpServlet {
 		String path = request.getRequestURI();
 
 		if (path.contains("login") && request.getParameter("email") != null) { // si le user a tenté de se logger
-			boolean isLogged = Login.login(request.getParameter("email"), request.getParameter("password"));
-			System.out.println(isLogged + "test login");
-			if (isLogged) {
+			Utilisateur utilisateur = Login.login(request.getParameter("email"), request.getParameter("password"));
+			System.out.println(utilisateur + "test login");
+			if (utilisateur!=null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("isLogged", isLogged);
+				session.setAttribute("isLogged", true);
+				session.setAttribute("idUser", utilisateur.getId());
+				session.setAttribute("nomUser", utilisateur.getNom());
+				session.setAttribute("prenomUser", utilisateur.getPrenom());
 //				address = "/WEB-INF/index.jsp";
 				address = "/login.jsp";
 			} else {

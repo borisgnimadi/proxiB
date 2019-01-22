@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 
 <%
 	String activeGerant = "";
 	String activeConseiller = "";
 	String userType = "";
-	String path = (String)request.getAttribute("path");
+	String path = (String) request.getAttribute("path");
 
-	if (request.getAttribute("path")!=null&& path.contains("Gerant")) {
+	if (request.getAttribute("path") != null && path.contains("Gerant")) {
 		activeGerant = "nav-item active";
 		userType = "gerant";
-	} else if (request.getAttribute("path")!=null&& path.contains("Conseiller")) {
+	} else if (request.getAttribute("path") != null && path.contains("Conseiller")) {
 		activeConseiller = "nav-item active";
 		userType = "conseiller";
 	}
@@ -54,7 +54,10 @@
 						href="Conseiller" id="navbardrop"> Conseiller </a></li>
 				</ul>
 
+
 				<ul class="nav navbar-nav navbar-right">
+					<li>Bonjour <%=session.getAttribute("nomUser")%></li>
+
 					<li><a href="deconnexion.jsp">Déconnexion</a></li>
 				</ul>
 

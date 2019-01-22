@@ -21,10 +21,8 @@ public class UserDaoLogin extends AbstractDaoJdbc  {
 		System.out.println(password);
 		try {
 			Connection cn = AbstractDaoJdbc.getConnetion();
-			String req = "SELECT id FROM users WHERE email= ? AND password = ?";
+			String req = "SELECT * FROM users WHERE email= '"+email+"' AND password = '"+password+"'";
 			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
-			st.setString(1, email);
-			st.setString(2, password);
 			ResultSet rs = st.executeQuery(req);
 
 			while (rs.next()) {
@@ -32,6 +30,8 @@ public class UserDaoLogin extends AbstractDaoJdbc  {
 				String prenom = rs.getString("prenom");
 				int id = rs.getInt("id");
 				person = new Utilisateur(id, nom, prenom, email);
+				System.out.println(person);
+				System.out.println(id);
 			}
 			AbstractDaoJdbc.close(cn, st, rs);
 		} catch (SQLException ex) {

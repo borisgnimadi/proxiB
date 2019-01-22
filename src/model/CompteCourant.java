@@ -1,8 +1,9 @@
 package model;
+import java.util.List;
 
 public class CompteCourant {
 	Double soldeCompteCourant;
-	Integer numCompteCourant ;;
+	Integer numCompteCourant ;
 	
 	
 	public Double getSoldeCompteCourant() {
@@ -26,7 +27,7 @@ public class CompteCourant {
 	}
 	
 	public static int CreateCompteCourant() {
-		return (int)Math.random() * 100000000;
+		return ( int)(Math.random( )*1000000000);
 	}
 
 

@@ -31,7 +31,7 @@ public class CompteEpargne {
 		this.numCompteCourant = numCompteCourant;
 	}
 	public static int CreateCompteEpargne() {
-		return (int)Math.random() * 1000000000;
+		return (int)( int)(Math.random( )*1000000000);
 	}
 
 

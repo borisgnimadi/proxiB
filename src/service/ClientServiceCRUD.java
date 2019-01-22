@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.ClientDao;
 import model.Client;
+import model.Compte;
 
 public class ClientServiceCRUD implements UserServiceCRUD <Client>{
 	
@@ -22,9 +23,8 @@ public class ClientServiceCRUD implements UserServiceCRUD <Client>{
 
 	@Override
 	public void update(Client cl) {
-		dao.update(cl);	
-		
-	}
+		dao.update(cl);
+ 	}
 
 	@Override
 	public Client findById(int id) {
@@ -41,10 +41,12 @@ public class ClientServiceCRUD implements UserServiceCRUD <Client>{
 		return dao.findAll();
 	}
 
-	
-	public void depotFondSurCompte(int numCompte, Double montant, String nom, String prenom) {
-		dao.depotFondSurCompte(numCompte, montant, nom, prenom);		
+	public List<Compte> findAllCompte() {
+		return dao.findAllCompte();
+	}	
+	public void depotFondSurCompte(Integer numCompte, Double montant, int idClient) {
+		dao.depotFondSurCompte(numCompte, montant, idClient);		
 	}
 
-
+	
 }

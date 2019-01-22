@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Client;
+import model.Compte;
 import model.Utilisateur;
 
 public class ClientDao extends AbstractDaoJdbc implements UserDao<Client> {
@@ -184,15 +185,14 @@ public class ClientDao extends AbstractDaoJdbc implements UserDao<Client> {
 		return allPerson;
 	}
 
-	public void depotFondSurCompte(int numCompte, Double montant, String nom, String prenom) {
-		System.out.println("test"+findIdByUsername(nom, prenom));
+	public void depotFondSurCompte(Integer numCompte, Double montant, int idClient) {
 		try {
 			Connection cn = AbstractDaoJdbc.getConnetion();
 			String req = "INSERT INTO compte (numero,solde,id_client) " + " VALUES ( ?, ?, ?)";
 			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
 			st.setInt(1, numCompte);
 			st.setDouble(2, montant);
-			st.setInt(3, findIdByUsername(nom, prenom));
+			st.setInt(3, idClient);
 
 			st.execute();
 
@@ -204,4 +204,40 @@ public class ClientDao extends AbstractDaoJdbc implements UserDao<Client> {
 		}
 
 	}
+	
+	public List<Compte> findAllCompte() {
+		
+		List<Compte> compte = new ArrayList<>();
+
+		try {
+			Connection cn = AbstractDaoJdbc.getConnetion();
+			String req = "SELECT nom, prenom, numero, solde FROM client, compte WHERE client.id =compte.id_client";
+			PreparedStatement st = AbstractDaoJdbc.getConnetion().prepareStatement(req);
+			ResultSet rs = st.executeQuery(req);
+
+			while (rs.next()) {
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				int numero = rs.getInt("numero");
+				Double solde = rs.getDouble("solde");
+				
+				Compte compteunique= new Compte(nom, prenom, numero, solde);
+				
+
+				compte.add(compteunique);
+			}
+			AbstractDaoJdbc.close(cn, st, rs);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.out.println("Problème de connexion !");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return compte;
+
+		
+
+	}	
+	
 }
